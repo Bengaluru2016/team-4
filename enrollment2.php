@@ -51,34 +51,33 @@
 <?php
   require_once('dbConnect.php');
   $con=mysqli_connect($host,$user,$pass,$database);
+   $suveryer_name = $_GET['suveryer_name'];
+$survey_locality = $_GET['survey_locality'];
   if($con)
   echo 'Connected successfully to mydb database';
   
-  $q="";
 
-  echo "<form role='form' style='color:rgb(140,140,140)' action='diaryFINAL.php' onsubmit='' method='get'>
+ 
+$q="SELECT name, fatname, motname FROM student WHERE suveryer_name =$suveryer_name  AND locality = $survey_locality ";";
+
+echo "<form role='form' style='color:rgb(140,140,140)' action='enroll.php' onsubmit='' method='get'>
 	<table border='border' class='t' width='600' align='center'> 
     <tr><th class='dth' width='100' >Student's Name</th>
     <th class='dth' width='400''>Father's Name</th>
-	<th class='dth' width='400''>Mother's Name</th></tr>";
+	<th class='dth' width='400''>Mother's Name</th>
+	<th /> </tr>";
 
 while($k=mysqli_fetch_array($q,MYSQLI_ASSOC))
 
 { 
-$_SESSION['dsub']=$k['dsub'];
-$_SESSION['ddate']=$k['ddat'];
-$_SESSION['dloc']=$k['dloc'];
-$_SESSION['dtext']=$k['dtxt'];
-$_SESSION["tsub"]=$k["dsub"];
-echo "<tr><td class='dtd' width='400'>".$k["ddat"]."</td> ";
-$a=$k["dsub"];
-echo "<td  class='dtd' width='400' ><a href='diarydisplay2.php?dsubject=$a'>".$k["dsub"]."</td> </tr>";
+echo "<tr><td class='dtd' width='400'>".$k["name"]."</td> ";
+echo "<tr><td class='dtd' width='400'>".$k["fatname"]."</td> ";
+echo "<tr><td class='dtd' width='400'>".$k["motname"]."</td> ";
+echo "<tr><td class='dtd' width='400'><a href="yesenroll.php"><button name="Enroll"></button></a> </td> ";
 
 }
 
-echo "<input type='submit' style='margin-top:-20px;margin-right:175px;padding:5px;font-weight:bold;' value='Enrolled' onclick='yesenrolled.php'></input></form>"
-
-//mysqli_close($dbh);
+mysqli_close($con);
 ?>
 				
 				</div>
