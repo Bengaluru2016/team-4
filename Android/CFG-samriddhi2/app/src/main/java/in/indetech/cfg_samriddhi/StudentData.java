@@ -5,9 +5,9 @@ package in.indetech.cfg_samriddhi;
  */
 public class StudentData {
 
-    String student_name, locality_name, surveyer_name;
-    String dob, age, gender, no_of_siblings, mother_tongue;
-    String education_level, previous_occupation, reason;
+    private String student_name, locality_name, surveyer_name;
+    private String dob, age, gender, no_of_siblings, mother_tongue;
+    private String education_level, previous_occupation, reason;
 
     //father's details
     String father_name, father_occupation, father_income, father_number;

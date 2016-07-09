@@ -79,7 +79,7 @@ public class Login extends AppCompatActivity {
                             .putBoolean(Constants.LOGIN_SHARED_PREFERENCE, true)
                             .putString(Constants.LOCALITY_PREFERENCE, location)
                             .apply();
-                    startActivity(new Intent(Login.this, StudentDetails.class));
+                    startActivity(new Intent(Login.this, StudentDetailsOne.class));
                     finish();
                 } else {
                     mProgressDialog.dismiss();

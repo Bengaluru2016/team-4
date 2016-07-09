@@ -23,7 +23,7 @@ public class SplashScreen extends AppCompatActivity {
                 try {
                     Thread.sleep(1250);
                     if (mPreferences.getBoolean(Constants.LOGIN_SHARED_PREFERENCE, false)) {
-                        startActivity(new Intent(SplashScreen.this, StudentDetails.class));
+                        startActivity(new Intent(SplashScreen.this, StudentDetailsOne.class));
                         finish();
                     } else {
                         startActivity(new Intent(SplashScreen.this, Login.class));
