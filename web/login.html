@@ -1,34 +1,5 @@
 
-<?
-php
 
-include "dbConnect.php";
-$username= $_GET["username"];
-$password=$_GET["password"];
-
-if(isset($username) && isset($password))
-{
-if(!empty($username) && !empty($password))
-{
-$sql = "select email,password from regdata";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        if($row["email"]=="darshan@gmail.com" && $row["password"]=="darshan")
-		{
-		session_start();
-		$_SESSION['login_user']= $username;  // Initializing Session with value of PHP Variable
-echo "welcome:" .$_SESSION['login_user'];
-header(location: "enrollment.html");
-		
-		}
-    }
-}
-}
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -93,7 +64,7 @@ header(location: "enrollment.html");
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="login-form" action="login.html" method="post" role="form" style="display: block;">
+								<form id="login-form" action="login12.php" method="post" role="form" style="display: block;">
 									<div class="form-group">
 										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
 									</div>
