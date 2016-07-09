@@ -19,7 +19,8 @@
         </activity>
         <activity android:name=".Login" />
         <activity android:name=".StudentDetailsOne" />
-        <activity android:name=".StudentDetailsTwo"></activity>
+        <activity android:name=".StudentDetailsTwo" />
+        <activity android:name=".StudentDetailsThree"></activity>
     </application>
 
 </manifest>
