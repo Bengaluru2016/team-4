@@ -1,0 +1,11 @@
+<?php
+ 
+//define host, database name, user and pass:
+$db_host = 'YOUR Host IP/URL:PORT'
+$db_database = 'YOUR_DATABASE';
+$db_user = 'USERNAME';
+$db_password = 'Password';
+//connect:
+$db = mysql_connect($db_host, $db_user, $db_password);
+mysql_select_db($db_database);
+?>
