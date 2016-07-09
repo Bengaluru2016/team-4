@@ -1,0 +1,17 @@
+<?php
+// My sql table has the columns Date, Margin, Target, Last month Margin, so I want the lines to //contain summed up values for each day. Except target, which is the monthly  target on each row, //to create a horizontal line
+$sqlQuery = "SELECT fulldate,
+round((SELECT SUM(last_month_margin) FROM dummy_value_daily d2 WHERE d1.fulldate>=d2.fulldate),2) AS last_month_margin ,
+round(Target,2) AS Target,
+round((SELECT SUM(margin) FROM dummy_value_daily d2 WHERE d1.fulldate>=d2.fulldate),2) AS margin
+FROM dummy_value_daily d1
+group by 1";
+$sqlResult = mysql_query($sqlQuery);
+while ($row = mysql_fetch_assoc($sqlResult)) {
+
+//echo to put it in the right format
+echo " data.addRow(['{$row['fulldate']}', {v: {$row['last_month_margin']}, f: '&#8364 {$row['last_month_margin']}' }, {v: {$row['Target']}, f: '&#8364 {$row['Target']}' }, {v: {$row['margin']}, f: '&#8364 {$row['margin']}' } ]); ";
+
+}
+
+?>

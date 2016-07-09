@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="refresh" content="180" >
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<title>
+Google Visualization API Sample
+</title>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+google.load('visualization', '1', {packages: ['corechart']});
+</script>
+<script type="text/javascript">
+
+function drawVisualization() {
+// Create and populate the data table.
+var data = new google.visualization.DataTable();
+data.addColumn('string', 'date_minute');
+data.addColumn('number', 'Last Month');
+data.addColumn('number', 'Target');
+data.addColumn('number', 'Margin');
+<?php
+
+$db_host = 'your_host';
+$db_database = 'your_Database';
+$db_user = 'your_user';
+$db_password = 'your_password';
+
+$db = mysql_connect($db_host, $db_user, $db_password);
+mysql_select_db($db_database);
+
+$sqlQuery = "SELECT right(fulldate,2) as fulldate,
+round((SELECT SUM(last_month_margin) FROM dummy_value_daily d2 WHERE d1.fulldate>=d2.fulldate),2) AS last_month_margin ,
+round(Target,2) AS Target,
+round((SELECT SUM(margin) FROM dummy_value_daily d2 WHERE d1.fulldate>=d2.fulldate),2) AS margin
+FROM dummy_value_daily d1
+group by 1";
+$sqlResult = mysql_query($sqlQuery);
+while ($row = mysql_fetch_assoc($sqlResult)) {
+
+echo " data.addRow(['{$row['fulldate']}', {v: {$row['last_month_margin']}, f: '€ {$row['last_month_margin']}' }, {v: {$row['Target']}, f: '€ {$row['Target']}' }, {v: {$row['margin']}, f: '€ {$row['margin']}' } ]); ";
+
+}
+
+?>
+
+// Create and draw the visualization.
+new google.visualization.LineChart(document.getElementById('visualization')).
+draw(data, {curveType: "none",
+title: "Monthly Margin",
+titleTextStyle: {color: "orange"},
+width: 1600, height: 400,
+//vAxis: {maxValue: 10},
+vAxis: {minValue: 0},
+vAxis: {title: 'Euro'},
+vAxis: {baseline: 0},
+vAxis: {gridlines: {count: 10}  },
+vAxis: {title: "Euro", titleTextStyle: {color: "orange"}},
+hAxis: {title: "Day", titleTextStyle: {color: "orange"}},
+interpolateNulls: 1
+}
+);
+}
+
+google.setOnLoadCallback(drawVisualization);
+</script>
+</head>
+<body style="font-family: Arial;border: 0 none;">
+<div id="visualization" style="width: 500px; height: 400px;"></div>
+</body>
+</html>
