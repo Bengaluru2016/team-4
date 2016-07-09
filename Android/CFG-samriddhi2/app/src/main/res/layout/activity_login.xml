@@ -27,7 +27,7 @@
         android:layout_below="@+id/lay1"
         android:layout_margin="4dp"
         android:layout_height="wrap_content"
-        android:id="@+id/view">
+        android:id="@+id/lay2">
 
         <EditText
             android:layout_width="match_parent"
@@ -35,6 +35,22 @@
             android:id="@+id/password"
             android:inputType="textPassword"
             android:hint="Enter the password" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/lay2"
+        android:layout_margin="4dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/view">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/locality"
+            android:inputType="text"
+            android:hint="Enter the Location" />
 
     </android.support.design.widget.TextInputLayout>
 

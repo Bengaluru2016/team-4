@@ -25,7 +25,7 @@ import java.net.URL;
 
 public class Login extends AppCompatActivity {
 
-    EditText username, password;
+    EditText username, password, locality;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,7 @@ public class Login extends AppCompatActivity {
 
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
+        locality = (EditText) findViewById(R.id.locality);
 
     }
 
@@ -45,12 +46,12 @@ public class Login extends AppCompatActivity {
 
         String user_name = username.getText().toString();
         String pass_word = password.getText().toString();
-
-        authenticate(user_name, pass_word);
+        String location = locality.getText().toString();
+        authenticate(user_name, pass_word, location);
 
     }
 
-    private void authenticate(final String user_name, final String pass_word) {
+    private void authenticate(final String user_name, final String pass_word, final String location) {
 
         new AsyncTask<Void, Void, Void>() {
 
@@ -70,13 +71,17 @@ public class Login extends AppCompatActivity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                if(Response.equals("success")){
+                if (Response.equals("success")) {
                     mProgressDialog.dismiss();
                     SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(Login.this);
-                    mSharedPreferences.edit().putBoolean(Constants.LOGIN_SHARED_PREFERENCE,true).apply();
-                    startActivity(new Intent(Login.this,StudentDetails.class));
+                    mSharedPreferences.edit()
+                            .putString(Constants.USERNAME_PREFERENCE, user_name)
+                            .putBoolean(Constants.LOGIN_SHARED_PREFERENCE, true)
+                            .putString(Constants.LOCALITY_PREFERENCE, location)
+                            .apply();
+                    startActivity(new Intent(Login.this, StudentDetails.class));
                     finish();
-                }else{
+                } else {
                     mProgressDialog.dismiss();
                     Toast.makeText(Login.this, "Login failed , please try again!", Toast.LENGTH_SHORT).show();
                 }
@@ -87,59 +92,59 @@ public class Login extends AppCompatActivity {
 
                 BufferedReader mBufferedInputStream;
 
-                    try {
-                        URL url = new URL(Constants.URL+"/login.php");
+                try {
+                    URL url = new URL(Constants.URL + "/login.php");
 
-                        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
-                        httpURLConnection.setConnectTimeout(15000);
-                        httpURLConnection.setReadTimeout(10000);
-                        httpURLConnection.setDoInput(true);
-                        httpURLConnection.setDoOutput(true);
+                    httpURLConnection.setConnectTimeout(15000);
+                    httpURLConnection.setReadTimeout(10000);
+                    httpURLConnection.setDoInput(true);
+                    httpURLConnection.setDoOutput(true);
 
 
-                        Uri.Builder builder = new Uri.Builder()
-                                .appendQueryParameter("username", user_name)
-                                .appendQueryParameter("password", pass_word);
+                    Uri.Builder builder = new Uri.Builder()
+                            .appendQueryParameter("username", user_name)
+                            .appendQueryParameter("password", pass_word);
 
-                        String query = builder.build().getEncodedQuery();
+                    String query = builder.build().getEncodedQuery();
 
-                        OutputStream os = httpURLConnection.getOutputStream();
+                    OutputStream os = httpURLConnection.getOutputStream();
 
-                        BufferedWriter mBufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-                        mBufferedWriter.write(query);
-                        mBufferedWriter.flush();
-                        mBufferedWriter.close();
-                        os.close();
+                    BufferedWriter mBufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                    mBufferedWriter.write(query);
+                    mBufferedWriter.flush();
+                    mBufferedWriter.close();
+                    os.close();
 
-                        httpURLConnection.connect();
+                    httpURLConnection.connect();
 
-                        Log.d("DARSHAN", "response code " + httpURLConnection.getResponseCode());
+                    Log.d("DARSHAN", "response code " + httpURLConnection.getResponseCode());
 
-                        if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
 
-                            mBufferedInputStream = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
-                            String inline;
-                            while ((inline = mBufferedInputStream.readLine()) != null) {
-                                Response += inline;
-                            }
-                            mBufferedInputStream.close();
-                            Log.d("DARSHAN", "sent the msg successfully");
-
-                            Log.d("DARSHAN", Response);
-
-                        } else {
-                            Log.d("darshan", "something wrong");
-
+                        mBufferedInputStream = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+                        String inline;
+                        while ((inline = mBufferedInputStream.readLine()) != null) {
+                            Response += inline;
                         }
+                        mBufferedInputStream.close();
+                        Log.d("DARSHAN", "sent the msg successfully");
 
-                    } catch (MalformedURLException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        Log.d("DARSHAN", Response);
+
+                    } else {
+                        Log.d("darshan", "something wrong");
+
                     }
 
-                    return null;
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                return null;
 
 
             }
@@ -147,5 +152,5 @@ public class Login extends AppCompatActivity {
         }.execute();
 
 
-        }
     }
+}
