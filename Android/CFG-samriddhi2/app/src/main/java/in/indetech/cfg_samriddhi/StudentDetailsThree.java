@@ -1,7 +1,6 @@
 package in.indetech.cfg_samriddhi;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -48,6 +47,8 @@ public class StudentDetailsThree extends AppCompatActivity {
 
         addData();
 
+        Log.d(Constants.TAG, StudentDetailsOne.studentdata.getMother_number()+" "+StudentDetailsOne.studentdata.getReason());
+
     }
 
     private void addData() {
@@ -78,10 +79,15 @@ public class StudentDetailsThree extends AppCompatActivity {
                     Toast.makeText(StudentDetailsThree.this, "Update failed , please try again!", Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             protected Void doInBackground(Void... voids) {
 
                 BufferedReader mBufferedInputStream;
+
+                SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(StudentDetailsThree.this);
+                String username = mSharedPreferences.getString(Constants.USERNAME_PREFERENCE, "not available");
+                String locality = mSharedPreferences.getString(Constants.LOCALITY_PREFERENCE, "not available");
 
                 try {
                     URL url = new URL(Constants.URL + "/test_survey.php");
@@ -110,12 +116,15 @@ public class StudentDetailsThree extends AppCompatActivity {
                             .appendQueryParameter("fatocc", StudentDetailsOne.studentdata.getFather_occupation())
                             .appendQueryParameter("fatinc", StudentDetailsOne.studentdata.getFather_income())
                             .appendQueryParameter("fatmobno", StudentDetailsOne.studentdata.getFather_number())
+                            .appendQueryParameter("mot", StudentDetailsOne.studentdata.getMother_name())
                             .appendQueryParameter("motname", StudentDetailsOne.studentdata.getMother_name())
                             .appendQueryParameter("motocc", StudentDetailsOne.studentdata.getMother_occupation())
                             .appendQueryParameter("motmobno", StudentDetailsOne.studentdata.getMother_number())
                             .appendQueryParameter("natstate", StudentDetailsOne.studentdata.getState())
                             .appendQueryParameter("natdist", StudentDetailsOne.studentdata.getDistrict())
                             .appendQueryParameter("nataddr", StudentDetailsOne.studentdata.getAddress())
+                            .appendQueryParameter("suveryer_name", username)
+                            .appendQueryParameter("survey_locality", locality)
                             .appendQueryParameter("contno", StudentDetailsOne.studentdata.getNative_contact());
 
                     String query = builder.build().getEncodedQuery();
@@ -156,14 +165,13 @@ public class StudentDetailsThree extends AppCompatActivity {
                 }
 
 
-
-            return null;
+                return null;
+            }
         }
+
+                .
+
+                        execute();
+
     }
-
-    .
-
-    execute();
-
-}
 }
