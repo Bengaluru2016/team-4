@@ -10,13 +10,13 @@ public class StudentData {
     private String education_level, previous_occupation, reason;
 
     //father's details
-    String father_name, father_occupation, father_income, father_number;
+    private String father_name, father_occupation, father_income, father_number;
 
     //mother name
-    String mother_name, mother_occupation, mother_income, mother_number;
+    private String mother_name, mother_occupation, mother_income, mother_number;
 
     //native details
-    String state, district, address, native_contact;
+    private String state, district, address, native_contact;
 
     public String getStudent_name() {
         return student_name;

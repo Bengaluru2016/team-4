@@ -1,0 +1,123 @@
+<?php
+// Connect to MySQL
+$link = mysql_connect( 'localhost', 'root', '' );
+if ( !$link ) {
+  die( 'Could not connect: ' . mysql_error() );
+}
+
+// Select the data base
+$db = mysql_select_db( 'test', $link );
+if ( !$db ) {
+  die ( 'Error selecting database \'test\' : ' . mysql_error() );
+}
+
+// Fetch the data
+$query = "
+  SELECT *
+  FROM my_chart_data
+  ORDER BY category ASC";
+$result = mysql_query( $query );
+
+// All good?
+if ( !$result ) {
+  // Nope
+  $message  = 'Invalid query: ' . mysql_error() . "\n";
+  $message .= 'Whole query: ' . $query;
+  die( $message );
+}
+
+// Print out rows
+while ( $row = mysql_fetch_assoc( $result ) ) {
+  echo $row['category'] . ' | ' . $row['value1'] . ' | ' .$row['value2'] . "\n";
+}
+
+// Close the connection
+mysql_close($link);
+?>
+
+$prefix = '';
+echo "[\n";
+while ( $row = mysql_fetch_assoc( $result ) ) {
+  echo $prefix . " {\n";
+  echo '  "category": "' . $row['category'] . '",' . "\n";
+  echo '  "value1": ' . $row['value1'] . ',' . "\n";
+  echo '  "value2": ' . $row['value2'] . '' . "\n";
+  echo " }";
+  $prefix = ",\n";
+}
+echo "\n]";
+Now it produces a nicely formatted, valid JSON data:
+
+[{
+  "category": "2013-08-24",
+  "value1": 417,
+  "value2": 127
+}, {
+  "category": "2013-08-25",
+  "value1": 417,
+  "value2": 356
+}, {
+  "category": "2013-08-26",
+  "value1": 531,
+  "value2": 585
+}, {
+  "category": "2013-08-27",
+  "value1": 333,
+  "value2": 910
+}, {
+  "category": "2013-08-28",
+  "value1": 552,
+  "value2": 30
+}, {
+  "category": "2013-08-29",
+  "value1": 492,
+  "value2": 371
+}, {
+  "category": "2013-08-30",
+  "value1": 379,
+  "value2": 781
+}, {
+  "category": "2013-08-31",
+  "value1": 767,
+  "value2": 494
+}, {
+  "category": "2013-09-01",
+  "value1": 169,
+  "value2": 364
+}, {
+  "category": "2013-09-02",
+  "value1": 314,
+  "value2": 476
+}, {
+  "category": "2013-09-03",
+  "value1": 437,
+  "value2": 759
+}]
+Let’s go and verify the output if it’s a valid JSON. Yup, it is.
+
+php1
+
+#3: Loading the data in browser via JavaScript
+I’m going to create data loader functions in the AmCharts namespace, so to avoid any potential conflicts with your and 3rd party JavaScript code.
+
+Let’s create a function that first loads the target URL data then parses it. Please note that JSON is essentially JavaScript, so we’re just going to use eval() function to “parse” the data.
+
+AmCharts.loadJSON = function(url) {
+  // create the request
+  if (window.XMLHttpRequest) {
+    // IE7+, Firefox, Chrome, Opera, Safari
+    var request = new XMLHttpRequest();
+  } else {
+    // code for IE6, IE5
+    var request = new ActiveXObject('Microsoft.XMLHTTP');
+  }
+
+  // load it
+  // the last "false" parameter ensures that our code will wait before the
+  // data is loaded
+  request.open('GET', url, false);
+  request.send();
+
+  // parse and return the output
+  return eval(request.responseText);
+};
