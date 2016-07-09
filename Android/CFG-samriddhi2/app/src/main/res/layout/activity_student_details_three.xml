@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/palm"
     tools:context="in.indetech.cfg_samriddhi.StudentDetailsThree">
 
     <ScrollView
@@ -18,7 +19,10 @@
                 android:id="@+id/view1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_margin="8dp"
+                android:textColor="@color/colorAccent"
+                android:layout_centerHorizontal="true"
+                android:textSize="20sp"
                 android:text="Details of Native Place" />
 
             <android.support.design.widget.TextInputLayout
