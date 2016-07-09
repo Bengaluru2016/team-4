@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -14,9 +15,7 @@ public class StudentDetailsOne extends AppCompatActivity {
 
     public static StudentData studentdata;
 
-    EditText studentNameEditText,ageEditText,noOfSiblingsEditText
-            ,motherTongueEditText,educationLevelEditText,previousOccupationEditText
-            ,reasonEditText;
+    EditText studentNameEditText, ageEditText, noOfSiblingsEditText, motherTongueEditText, educationLevelEditText, previousOccupationEditText, reasonEditText;
 
     RadioGroup radioGroup;
 
@@ -33,7 +32,6 @@ public class StudentDetailsOne extends AppCompatActivity {
         studentdata = new StudentData();
 
 
-
         init();
 
     }
@@ -43,7 +41,7 @@ public class StudentDetailsOne extends AppCompatActivity {
         studentNameEditText = (EditText) findViewById(R.id.studentNameEditText);
         ageEditText = (EditText) findViewById(R.id.ageEditText);
         noOfSiblingsEditText = (EditText) findViewById(R.id.noOfSibEditText);
-        motherTongueEditText= (EditText) findViewById(R.id.motherTongueEditText);
+        motherTongueEditText = (EditText) findViewById(R.id.motherTongueEditText);
         educationLevelEditText = (EditText) findViewById(R.id.educationLevelEditText);
         previousOccupationEditText = (EditText) findViewById(R.id.previousOccupationEditText);
         reasonEditText = (EditText) findViewById(R.id.reasonEditText);
@@ -55,9 +53,10 @@ public class StudentDetailsOne extends AppCompatActivity {
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if (i==0){
+                Log.d(Constants.TAG, "onCheckedChanged() called with: " + "radioGroup = [" + radioGroup + "], i = [" + i + "]");
+                if (i == R.id.male) {
                     gender = "male";
-                }else{
+                } else {
                     gender = "female";
                 }
             }
@@ -72,7 +71,7 @@ public class StudentDetailsOne extends AppCompatActivity {
                 new DatePickerDialog(StudentDetailsOne.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        dob = i+"-"+i1+"-"+i2;
+                        dob = i + "-" + i1 + "-" + i2;
                     }
                 }, 2016, 7, 10).show();
 
@@ -93,9 +92,7 @@ public class StudentDetailsOne extends AppCompatActivity {
         studentdata.setGender(gender);
         studentdata.setDob(dob);
 
-        startActivity(new Intent(StudentDetailsOne.this,StudentDetailsTwo.class));
-
-
+        startActivity(new Intent(StudentDetailsOne.this, StudentDetailsTwo.class));
 
 
     }
