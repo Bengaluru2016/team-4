@@ -7,18 +7,13 @@ if ( !$link ) {
   die( 'Could not connect: ' . mysql_error() );
 }
 
-// Select the data base
-$db = mysql_select_db( 'test', $link );
-if ( !$db ) {
-  die ( 'Error selecting database \'test\' : ' . mysql_error() );
-}
-
-// Fetch the data
-$query = "
-  SELECT *
+$sql="
+  SELECT name
   FROM student
   ORDER BY name ASC";
+$query=mysqli_query($con,$sql);
 $result = mysql_query( $query );
+if($query)
 
 // All good?
 if ( !$result ) {
