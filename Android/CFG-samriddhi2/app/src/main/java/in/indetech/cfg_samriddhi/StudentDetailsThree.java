@@ -70,8 +70,9 @@ public class StudentDetailsThree extends AppCompatActivity {
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
-                if (Response.equals("success")) {
+                if (Response.equals("successfully registered")) {
                     mProgressDialog.dismiss();
+                    Toast.makeText(StudentDetailsThree.this, "Update successful", Toast.LENGTH_SHORT).show();
                 } else {
                     mProgressDialog.dismiss();
                     Toast.makeText(StudentDetailsThree.this, "Update failed , please try again!", Toast.LENGTH_SHORT).show();
