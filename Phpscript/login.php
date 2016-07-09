@@ -6,7 +6,7 @@ $con = mysqli_connect(HOST,USER,PASS,DB);
 $username = $_POST['username'];
 $password = $_POST['password'];
  
-$sql = "select * from regdata where username='$username' and password='$password'";
+$sql = "select * from regdata where email='$username' and password='$password'";
  
 $res = mysqli_query($con,$sql);
  
