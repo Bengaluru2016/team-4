@@ -1,12 +1,17 @@
 package in.indetech.cfg_samriddhi;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -50,7 +55,28 @@ public class StudentDetailsThree extends AppCompatActivity {
         new AsyncTask<Void, Void, Void>() {
 
             String Response = "";
+            ProgressDialog mProgressDialog;
 
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                mProgressDialog = new ProgressDialog(StudentDetailsThree.this);
+                mProgressDialog.setMessage("Loading...");
+                mProgressDialog.setIndeterminate(true);
+                mProgressDialog.show();
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                if (Response.equals("success")) {
+                    mProgressDialog.dismiss();
+                } else {
+                    mProgressDialog.dismiss();
+                    Toast.makeText(StudentDetailsThree.this, "Update failed , please try again!", Toast.LENGTH_SHORT).show();
+                }
+            }
             @Override
             protected Void doInBackground(Void... voids) {
 
