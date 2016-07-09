@@ -7,7 +7,7 @@ public class Constants {
 
     public static String PACKEAGE_ID = "in.indetech.cfg_samriddhi";
     public static String LOGIN_SHARED_PREFERENCE = PACKEAGE_ID + "login";
-    public static String URL = "ec2-54-169-33-156.ap-southeast-1.compute.amazonaws.com";
+    public static String URL = "http://ec2-54-169-33-156.ap-southeast-1.compute.amazonaws.com";
     public static String TAG = "TEST";
 
 }

@@ -1,12 +1,17 @@
 package in.indetech.cfg_samriddhi;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -14,12 +19,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
-import java.util.logging.LogManager;
 
 public class Login extends AppCompatActivity {
 
@@ -52,62 +54,98 @@ public class Login extends AppCompatActivity {
 
         new AsyncTask<Void, Void, Void>() {
 
+            String Response = "";
+            ProgressDialog mProgressDialog;
+
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                mProgressDialog = new ProgressDialog(Login.this);
+                mProgressDialog.setMessage("Loading...");
+                mProgressDialog.setIndeterminate(true);
+                mProgressDialog.show();
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                if(Response.equals("success")){
+                    mProgressDialog.dismiss();
+                    SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(Login.this);
+                    mSharedPreferences.edit().putBoolean(Constants.LOGIN_SHARED_PREFERENCE,true).apply();
+                    startActivity(new Intent(Login.this,StudentDetails.class));
+                    finish();
+                }else{
+                    mProgressDialog.dismiss();
+                    Toast.makeText(Login.this, "Login failed , please try again!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
             @Override
             protected Void doInBackground(Void... voids) {
 
-                String Response = "";
+                BufferedReader mBufferedInputStream;
 
-                URL url;
-                try {
-                    url = new URL(Constants.URL + "login.php");
-                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    try {
+                        URL url = new URL(Constants.URL+"/login.php");
 
-                    httpURLConnection.setDoInput(true);
-                    httpURLConnection.setDoOutput(true);
-                    httpURLConnection.setRequestMethod("POST");
+                        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
-                    Uri.Builder builder = new Uri.Builder()
-                            .appendQueryParameter("username", "" + user_name)
-                            .appendQueryParameter("password", pass_word);
+                        httpURLConnection.setConnectTimeout(15000);
+                        httpURLConnection.setReadTimeout(10000);
+                        httpURLConnection.setDoInput(true);
+                        httpURLConnection.setDoOutput(true);
 
-                    String query = builder.build().getEncodedQuery();
 
-                    Log.d("test", query);
+                        Uri.Builder builder = new Uri.Builder()
+                                .appendQueryParameter("username", user_name)
+                                .appendQueryParameter("password", pass_word);
 
-                    OutputStream os = httpURLConnection.getOutputStream();
+                        String query = builder.build().getEncodedQuery();
 
-                    BufferedWriter mBufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-                    mBufferedWriter.write(query);
-                    mBufferedWriter.flush();
-                    mBufferedWriter.close();
-                    os.close();
+                        OutputStream os = httpURLConnection.getOutputStream();
 
-                    httpURLConnection.connect();
-                    BufferedReader mBufferedInputStream = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
-                    String inline;
-                    while ((inline = mBufferedInputStream.readLine()) != null) {
-                        Response += inline;
+                        BufferedWriter mBufferedWriter = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
+                        mBufferedWriter.write(query);
+                        mBufferedWriter.flush();
+                        mBufferedWriter.close();
+                        os.close();
+
+                        httpURLConnection.connect();
+
+                        Log.d("DARSHAN", "response code " + httpURLConnection.getResponseCode());
+
+                        if (httpURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+
+                            mBufferedInputStream = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+                            String inline;
+                            while ((inline = mBufferedInputStream.readLine()) != null) {
+                                Response += inline;
+                            }
+                            mBufferedInputStream.close();
+                            Log.d("DARSHAN", "sent the msg successfully");
+
+                            Log.d("DARSHAN", Response);
+
+                        } else {
+                            Log.d("darshan", "something wrong");
+
+                        }
+
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                    mBufferedInputStream.close();
-                    Log.d("response", Response);
 
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                } catch (ProtocolException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                Response = "";
-                Log.d(Constants.TAG, "doInBackground() called with: " + "voids = [" + Response + "]");
-                return null;
+                    return null;
 
 
             }
+
         }.execute();
 
 
+        }
     }
-}
