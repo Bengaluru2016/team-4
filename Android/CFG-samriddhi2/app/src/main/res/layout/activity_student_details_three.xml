@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/palm"
+    android:background="@drawable/helping_hands"
     tools:context="in.indetech.cfg_samriddhi.StudentDetailsThree">
 
     <ScrollView
@@ -32,6 +32,7 @@
                 android:layout_below="@+id/view1">
 
                 <EditText
+                    android:textColor="@color/colorAccent"
                     android:id="@+id/nativeState"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -47,6 +48,7 @@
                 <EditText
                     android:id="@+id/nativeDistrict"
                     android:layout_width="match_parent"
+                    android:textColor="@color/colorAccent"
                     android:layout_height="wrap_content"
                     android:hint="Native District" />
             </android.support.design.widget.TextInputLayout>
@@ -60,6 +62,7 @@
                 <EditText
                     android:id="@+id/nativeAddress"
                     android:layout_width="match_parent"
+                    android:textColor="@color/colorAccent"
                     android:layout_height="wrap_content"
                     android:hint="Native Address" />
             </android.support.design.widget.TextInputLayout>
@@ -72,6 +75,7 @@
 
                 <EditText
                     android:id="@+id/nativeContact"
+                    android:textColor="@color/colorAccent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Native Contact" />
