@@ -3,13 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:layout_margin="8dp"
+    android:background="@drawable/bg"
     tools:context="in.indetech.cfg_samriddhi.Login">
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_margin="4dp"
+        android:layout_margin="8dp"
         android:id="@+id/lay1"
         android:layout_height="wrap_content">
 
@@ -18,6 +17,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/username"
             android:inputType="text"
+            android:textColor="@color/colorAccent"
             android:hint="Enter the username" />
 
     </android.support.design.widget.TextInputLayout>
@@ -25,7 +25,7 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_below="@+id/lay1"
-        android:layout_margin="4dp"
+        android:layout_margin="8dp"
         android:layout_height="wrap_content"
         android:id="@+id/lay2">
 
@@ -33,6 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/password"
+            android:textColor="@color/colorAccent"
             android:inputType="textPassword"
             android:hint="Enter the password" />
 
@@ -41,7 +42,7 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_below="@+id/lay2"
-        android:layout_margin="4dp"
+        android:layout_margin="8dp"
         android:layout_height="wrap_content"
         android:id="@+id/view">
 
@@ -49,18 +50,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/locality"
+            android:textColor="@color/colorAccent"
             android:inputType="text"
             android:hint="Enter the Location" />
 
     </android.support.design.widget.TextInputLayout>
 
-    <Button
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:background="@drawable/arrow"
         android:onClick="login_method"
         android:id="@+id/button"
-        android:layout_below="@+id/view"
+        android:layout_marginBottom="38dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
 

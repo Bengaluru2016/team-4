@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/helping_hands"
     tools:context=".StudentDetailsOne">
 
     <ScrollView
@@ -28,19 +29,35 @@
                     android:hint="Student's name" />
             </android.support.design.widget.TextInputLayout>
 
-            <Button
-                android:id="@+id/datePicker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/view1"
-                android:text="DOB" />
 
+            <LinearLayout
+                android:id="@+id/lay3"
+                android:layout_below="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/datePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/view1"
+                    android:text="DOB" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_margin="4dp"
+                    android:layout_height="wrap_content"
+                    android:text="Pick Date"
+                    android:id="@+id/dateTv"/>
+
+            </LinearLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/view2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/datePicker">
+                android:layout_below="@+id/lay3">
 
                 <EditText
                     android:id="@+id/ageEditText"
@@ -63,15 +80,15 @@
                     android:text="Gender" />
 
                 <RadioButton
+                    android:id="@+id/male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/male"
                     android:text="Male" />
 
                 <RadioButton
+                    android:id="@+id/female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/female"
                     android:text="Female" />
             </RadioGroup>
 

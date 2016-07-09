@@ -17,10 +17,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login" />
-        <activity android:name=".StudentDetailsOne" />
-        <activity android:name=".StudentDetailsTwo" />
-        <activity android:name=".StudentDetailsThree"></activity>
+        <activity android:name=".Login"></activity>
+        <activity
+            android:name=".StudentDetailsOne"
+            android:windowSoftInputMode="stateVisible|adjustPan" />
+        <activity
+            android:name=".StudentDetailsTwo"
+            android:windowSoftInputMode="stateVisible|adjustPan" />
+        <activity
+            android:name=".StudentDetailsThree"
+            android:windowSoftInputMode="stateVisible|adjustPan"></activity>
     </application>
 
 </manifest>

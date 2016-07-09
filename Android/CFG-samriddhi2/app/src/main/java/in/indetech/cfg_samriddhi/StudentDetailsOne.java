@@ -10,12 +10,14 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 public class StudentDetailsOne extends AppCompatActivity {
 
     public static StudentData studentdata;
 
     EditText studentNameEditText, ageEditText, noOfSiblingsEditText, motherTongueEditText, educationLevelEditText, previousOccupationEditText, reasonEditText;
+    TextView datePick;
 
     RadioGroup radioGroup;
 
@@ -45,6 +47,7 @@ public class StudentDetailsOne extends AppCompatActivity {
         educationLevelEditText = (EditText) findViewById(R.id.educationLevelEditText);
         previousOccupationEditText = (EditText) findViewById(R.id.previousOccupationEditText);
         reasonEditText = (EditText) findViewById(R.id.reasonEditText);
+        datePick = (TextView) findViewById(R.id.dateTv);
 
         //
 
@@ -72,6 +75,7 @@ public class StudentDetailsOne extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
                         dob = i + "-" + i1 + "-" + i2;
+                        datePick.setText(dob);
                     }
                 }, 2016, 7, 10).show();
 

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/many_hands"
     android:layout_height="match_parent"
     tools:context="in.indetech.cfg_samriddhi.StudentDetailsTwo">
 
@@ -20,7 +21,10 @@
                 android:id="@+id/view1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="10dp"
                 android:text="Father Details" />
 
             <android.support.design.widget.TextInputLayout
@@ -80,7 +84,10 @@
                 android:id="@+id/view21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_margin="10dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/view5"
                 android:text="Mother Details" />
 
