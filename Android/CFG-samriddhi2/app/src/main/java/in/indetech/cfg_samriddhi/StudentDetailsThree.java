@@ -1,6 +1,7 @@
 package in.indetech.cfg_samriddhi;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -74,6 +75,9 @@ public class StudentDetailsThree extends AppCompatActivity {
                 if (Response.equals("successfully registered")) {
                     mProgressDialog.dismiss();
                     Toast.makeText(StudentDetailsThree.this, "Update successful", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(StudentDetailsThree.this, StudentDetailsOne.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
                 } else {
                     mProgressDialog.dismiss();
                     Toast.makeText(StudentDetailsThree.this, "Update failed , please try again!", Toast.LENGTH_SHORT).show();
