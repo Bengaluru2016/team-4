@@ -20,11 +20,12 @@
 		$natstate=$_POST['natstate'];
 		$natdist=$_POST['natdist'];
 		$nataddr=$_POST['nataddr'];
-		$natcontno=$_POST['contno'];
+		$natcontno=$_POST['contno'];$folder = "images/";
+
+move_uploaded_file($_FILES["filep"]["tmp_name"] , "$folder".$_FILES["filep"]["name"]);
+
 		
-		
-		
-		if($suveryer_name == 'suveryer_name' || $survey_locality == 'survey_locality' || $student_name == 'student_name' || $dob == 'dob' || $age == 'age'|| $gender == 'gender'|| $no_of_siblings == 'no_of_siblings' || $Mother_tongue == 'Mother_tongue'||  $education_level == 'education_level' || $previous_occupation=='previous_occupation'){
+		if($suveryer_name == '' || $survey_locality == '' || $student_name == '' || $dob == '' || $age == ''|| $gender ==''|| $no_of_siblings == '' || $Mother_tongue == ''||  $education_level == '' || $previous_occupation==''){
 			echo 'please fill all values';
 		}else{
 			require_once('dbConnect.php');
@@ -35,7 +36,7 @@
 			if(isset($check)){
 				echo 'username or email already exist';
 			}else{				
-				$sql = "INSERT INTO student ('name','dob','age','gender','nos',mtongue','edulevel','occbefore','reason','fatname','fatocc','fatinc','fatmobno','motname','motocc','motinc','motmobno','natstate','natdist','nataddr','natcontno') VALUES('$student_name','$dob','$age','gender','$no_of_siblings','$Mother_tongue','$education_level','$previous_occupation','$reason','$fatname','$fatocc','$fatinc','$fatmobno','$motname','$motocc','$motinc','$natstate','$natdist','$nataddr','$natcontno')";
+				$sql = "INSERT INTO student ('suveryer_name','locality','name','imgpath','dob','age','gender','nos',mtongue','edulevel','occbefore','reason','fatname','fatocc','fatinc','fatmobno','motname','motocc','motinc','motmobno','natstate','natdist','nataddr','natcontno') VALUES('$suveryer_name','$survey_locality','$student_name','".$_FILES['filep']['name']."','$dob','$age','gender','$no_of_siblings','$Mother_tongue','$education_level','$previous_occupation','$reason','$fatname','$fatocc','$fatinc','$fatmobno','$motname','$motocc','$motinc','$natstate','$natdist','$nataddr','$natcontno')";
 				if(mysqli_query($con,$sql)){
 					echo 'successfully registered';
 				}else{
