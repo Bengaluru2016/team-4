@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  
+  <title>Home Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+	
+	$(document).ready(function() {
+	
+		
+	
+		var  enrol = 0;
+		$.post("count.php", {data: "-"})
+		.done(function(data)
+		{	
+			enrol = parseInt(data);
+			
+			alert(enrol + " after parse doecument ready !!!");
+			
+			 google.charts.load('current', {'packages':['corechart']});
+			google.charts.setOnLoadCallback(drawChart);
+		  function drawChart() {
+
+			var data = google.visualization.arrayToDataTable([
+			  ['Task', 'Hours per Day'],
+			  ['Enrolled',     enrol],
+			  ['Surveyed, not Enrolled', enrol],
+		  
+			]);
+
+			var options = {
+			  title: 'Survey to Enrollment'
+			};
+
+			var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+			chart.draw(data, options);
+		  }
+			
+			
+			
+		});
+			 
+		 
+	  
+	  });
+    </script>
+
+  
+  <style type="text/css">
+		body { padding-top: 20px;
+			 	background: url(back.jpg);
+				color:maroon;	}
+		h1 {text-align:center;}
+		p {text-align:justify;}
+		.btn {align:center;}
+	</style>
+  </head>
+  <body>
+	<nav class="navbar navbar-default navbar-fixed">
+	
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Samridhdhi Trust</a>
+	  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+       </button>
+    </div>
+	
+    <ul class="nav navbar-nav nav-pills navbar-right">
+      <li class="active"><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
+      <li><a href=""> Enrollment</a></li>
+      <li><a href="http://localhost/planit/tasks.php"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Analysis</a></li> 
+      <li><a href="http://localhost/planit/diary.php"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Login/SignUp</a></li>
+		  
+   </ul>
+   
+   
+  </div>
+</nav>
+ 
+ <div class="container">
+<div class="row">
+<div class="category col-sm-1"></div>
+  <div class="category col-sm-8">
+			
+				 <div id="piechart" style="width: 900px; height: 500px;"></div>
+   </div>
+ </div>
+</div>
+
+
+
+	
+	<div class="navbar-xs">
+   <div class="navbar-primary">
+	<div class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+    	<div class="container">
+    		<div class="navbar-text navbar-center">
+				Education is the most powerful weapon which you can use to change the world! - Nelson Mandela
+			</div>
+    	</div>
+    </div>
+	</div>
+	</div>
+</body>
+</html>
