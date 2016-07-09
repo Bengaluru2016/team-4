@@ -6,9 +6,9 @@ include "dbConnect.php";
 $username= $_GET["username"];
 $password=$_GET["password"];
 
-if(isset($username)and isset($password))
+if(isset($username) && isset($password))
 {
-if(!empty($username) && !empty($password)
+if(!empty($username) && !empty($password))
 {
 $sql = "select email,password from regdata";
 $result = $conn->query($sql);
@@ -26,11 +26,8 @@ header(location: "enrollment.html");
 		}
     }
 }
-	
-	
 }
 }
-
 >?
 <!DOCTYPE html>
 <html lang="en">
