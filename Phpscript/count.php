@@ -20,6 +20,7 @@ $no = $values1['notenrolled'];
 }
 else{
 	echo 'failure';
+
 }
 
 mysqli_close($con);
