@@ -34,7 +34,6 @@
     </div>
 	
     <ul class="nav navbar-nav nav-pills navbar-right">
-      <li><a href=""><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
       <li class="active"><a href=""> Enrollment</a></li>
       <li><a href="piechart.html"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Analysis</a></li> 
       <li><a href="logout.php"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a></li>
@@ -44,16 +43,43 @@
 
 <div class="container">
 <div class="row">
-<div class="category col-sm-2"></div>
+<div class="category col-sm-1"></div>
   <div class="category col-sm-8">
-			<div class="jumbotron">
-				<p> Please enter the Student's name and Locality </p>
-				<form>
-					<input type="text" id="namecheck" placeholder="Student's Name"/>
-					<input type="text" id="localcheck" placeholder="Locality Name"/>
-					<input type="submit" action="enrollment2.php"/>
-				</form>
-			</div>
+	<div class="jumbotron">
+				
+<?php
+  require_once('dbConnect.php');
+  $con=mysqli_connect($host,$user,$pass,$database);
+   $suveryer_name = $_GET['suveryer_name'];
+$survey_locality = $_GET['survey_locality'];
+  if($con)
+  echo 'Connected successfully to mydb database';
+  
+
+ 
+$q="SELECT name, fatname, motname FROM student WHERE suveryer_name =$suveryer_name  AND locality = $survey_locality ";";
+
+echo "<form role='form' style='color:rgb(140,140,140)' action='enroll.php' onsubmit='' method='get'>
+	<table border='border' class='t' width='600' align='center'> 
+    <tr><th class='dth' width='100' >Student's Name</th>
+    <th class='dth' width='400''>Father's Name</th>
+	<th class='dth' width='400''>Mother's Name</th>
+	<th class='dth' width='400'>Enroll?</th> </tr>";
+
+while($k=mysqli_fetch_array($q,MYSQLI_ASSOC))
+
+{ 
+echo "<tr><td class='dtd' width='400'>".$k["name"]."</td> ";
+echo "<tr><td class='dtd' width='400'>".$k["fatname"]."</td> ";
+echo "<tr><td class='dtd' width='400'>".$k["motname"]."</td> ";
+echo "<tr><td class='dtd' width='400'><a href="yesenroll.php"><button name="Enroll"></button></a> </td> ";
+
+}
+
+mysqli_close($con);
+?>
+				
+				</div>
 	</div>
  </div>
 </div>

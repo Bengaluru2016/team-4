@@ -9,6 +9,51 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+	
+	$(document).ready(function() {
+	
+		
+	
+		var  enrol = 0;
+		$.post("count.php", {data: "-"})
+		.done(function(data)
+		{	
+			enrol = parseInt(data);
+			
+			alert(enrol + " after parse doecument ready !!!");
+			
+			 google.charts.load('current', {'packages':['corechart']});
+			google.charts.setOnLoadCallback(drawChart);
+		  function drawChart() {
+
+			var data = google.visualization.arrayToDataTable([
+			  ['Task', 'Hours per Day'],
+			  ['Enrolled',     enrol],
+			  ['Surveyed, not Enrolled', enrol],
+		  
+			]);
+
+			var options = {
+			  title: 'Survey to Enrollment'
+			};
+
+			var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+			chart.draw(data, options);
+		  }
+			
+			
+			
+		});
+			 
+		 
+	  
+	  });
+    </script>
+
+  
   <style type="text/css">
 		body { padding-top: 20px;
 			 	background: url(back.jpg);
@@ -19,7 +64,6 @@
 	</style>
   </head>
   <body>
-	  <body>
 	<nav class="navbar navbar-default navbar-fixed">
 	
   <div class="container">
@@ -34,31 +78,26 @@
     </div>
 	
     <ul class="nav navbar-nav nav-pills navbar-right">
-      <li><a href=""><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
-      <li class="active"><a href=""> Enrollment</a></li>
-      <li><a href="piechart.html"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Analysis</a></li> 
-      <li><a href="logout.php"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Logout</a></li>
+      <li class="active"><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
+      <li><a href=""> Enrollment</a></li>
+      <li><a href="http://localhost/planit/tasks.php"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Analysis</a></li> 
+      <li><a href="http://localhost/planit/diary.php"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Login/SignUp</a></li>
+		  
    </ul>
+   
+   
   </div>
 </nav>
-
-<div class="container">
+ 
+ <div class="container">
 <div class="row">
-<div class="category col-sm-2"></div>
+<div class="category col-sm-1"></div>
   <div class="category col-sm-8">
-			<div class="jumbotron">
-				<p> Please enter the Student's name and Locality </p>
-				<form>
-					<input type="text" id="namecheck" placeholder="Student's Name"/>
-					<input type="text" id="localcheck" placeholder="Locality Name"/>
-					<input type="submit" action="enrollment2.php"/>
-				</form>
-			</div>
-	</div>
+			
+				 <div id="piechart" style="width: 900px; height: 500px;"></div>
+   </div>
  </div>
 </div>
-
-
 
 
 

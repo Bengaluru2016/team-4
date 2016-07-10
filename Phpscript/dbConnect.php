@@ -1,5 +1,5 @@
 <?php
-	define('HOST','http://ec2-54-169-33-156.ap-southeast-1.compute.amazonaws.com/');
+	define('HOST','localhost');
 	define('USER','root');
 	define('PASS','darshan');
 	define('DB','Team4');

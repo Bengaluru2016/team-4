@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/many_hands"
+    android:background="@drawable/helping_hands"
     android:layout_height="match_parent"
     tools:context="in.indetech.cfg_samriddhi.StudentDetailsTwo">
 
@@ -36,6 +36,7 @@
                 <EditText
                     android:id="@+id/fatherNameEditText"
                     android:layout_width="match_parent"
+                    android:textColor="@color/colorAccent"
                     android:layout_height="wrap_content"
                     android:hint="Father Name" />
             </android.support.design.widget.TextInputLayout>
@@ -48,6 +49,7 @@
 
                 <EditText
                     android:id="@+id/fatherOccupationEditText"
+                    android:textColor="@color/colorAccent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Father's Occupation" />
@@ -62,6 +64,7 @@
                 <EditText
                     android:id="@+id/fatherIncomeEditText"
                     android:layout_width="match_parent"
+                    android:textColor="@color/colorAccent"
                     android:layout_height="wrap_content"
                     android:hint="Father's Income" />
             </android.support.design.widget.TextInputLayout>
@@ -73,6 +76,7 @@
                 android:layout_below="@+id/view4">
 
                 <EditText
+                    android:textColor="@color/colorAccent"
                     android:id="@+id/fatherMobileNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -99,6 +103,7 @@
 
                 <EditText
                     android:id="@+id/motherNameEditText"
+                    android:textColor="@color/colorAccent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Mother Name" />
@@ -114,6 +119,7 @@
                     android:id="@+id/motherOccupationEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
                     android:hint="Mother's Occupation" />
             </android.support.design.widget.TextInputLayout>
 
@@ -125,6 +131,7 @@
 
                 <EditText
                     android:id="@+id/motherIncomeEditText"
+                    android:textColor="@color/colorAccent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Mother's Income" />
@@ -139,6 +146,7 @@
                 <EditText
                     android:id="@+id/motherMobileNumber"
                     android:layout_width="match_parent"
+                    android:textColor="@color/colorAccent"
                     android:layout_height="wrap_content"
                     android:hint="Mother's mobile number" />
             </android.support.design.widget.TextInputLayout>

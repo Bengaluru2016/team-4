@@ -25,6 +25,7 @@
                 <EditText
                     android:id="@+id/studentNameEditText"
                     android:layout_width="match_parent"
+                    android:textColor="@color/colorAccent"
                     android:layout_height="wrap_content"
                     android:hint="Student's name" />
             </android.support.design.widget.TextInputLayout>
@@ -47,6 +48,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_margin="4dp"
+                    android:textColor="@color/colorAccent"
                     android:layout_height="wrap_content"
                     android:text="Pick Date"
                     android:id="@+id/dateTv"/>
@@ -62,6 +64,7 @@
                 <EditText
                     android:id="@+id/ageEditText"
                     android:layout_width="match_parent"
+                    android:textColor="@color/colorAccent"
                     android:layout_height="wrap_content"
                     android:hint="Age" />
             </android.support.design.widget.TextInputLayout>
@@ -75,6 +78,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
+                    android:textColor="@color/colorAccent"
                     android:layout_height="wrap_content"
                     android:layout_margin="3dp"
                     android:text="Gender" />
@@ -82,11 +86,13 @@
                 <RadioButton
                     android:id="@+id/male"
                     android:layout_width="wrap_content"
+                    android:textColor="@color/colorAccent"
                     android:layout_height="wrap_content"
                     android:text="Male" />
 
                 <RadioButton
                     android:id="@+id/female"
+                    android:textColor="@color/colorAccent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Female" />
@@ -100,6 +106,7 @@
 
                 <EditText
                     android:id="@+id/noOfSibEditText"
+                    android:textColor="@color/colorAccent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="No. of Siblings" />
@@ -114,6 +121,7 @@
                 <EditText
                     android:id="@+id/motherTongueEditText"
                     android:layout_width="match_parent"
+                    android:textColor="@color/colorAccent"
                     android:layout_height="wrap_content"
                     android:hint="Mother Tongue" />
             </android.support.design.widget.TextInputLayout>
@@ -129,6 +137,7 @@
                     android:id="@+id/educationLevelEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorAccent"
                     android:hint="Education Level" />
             </android.support.design.widget.TextInputLayout>
 
@@ -140,6 +149,7 @@
 
                 <EditText
                     android:id="@+id/previousOccupationEditText"
+                    android:textColor="@color/colorAccent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Previous Education" />
@@ -154,6 +164,7 @@
                 <EditText
                     android:id="@+id/reasonEditText"
                     android:layout_width="match_parent"
+                    android:textColor="@color/colorAccent"
                     android:layout_height="wrap_content"
                     android:hint="Reason for being out of school" />
             </android.support.design.widget.TextInputLayout>
