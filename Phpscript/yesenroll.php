@@ -32,8 +32,8 @@
 			
 			$check = mysqli_fetch_array(mysqli_query($con,$sql));
 			
-			if(isset($check)){
-				echo 'username or email already exist';
+			if(isset(!check)){
+				echo 'username does not exist'
 			}else{				
 				$sql = "UPDATE `student` SET `enrolled`=[yes] WHERE name=$name";
 				if(mysqli_query($con,$sql)){
